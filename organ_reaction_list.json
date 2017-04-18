@@ -1,0 +1,37 @@
+{skin: {
+    organ: 'Skin',
+    reactions: [
+      'Urticaria',
+      'Angioedema',
+      'Flushing',
+    ]
+ },
+ gi_tract: {
+    organ: 'GI Tract',
+    reactions: [
+      'Abdominal pain',
+      'Vomiting',
+      'Diarrhea'
+    ]
+  },
+ respiratory: {
+    organ: 'Respiratory',
+    reactions: [
+      'Cough',
+      'Wheezing',
+      'Stridor',
+      'Objective dyspnea',
+      'Accessory muscle use',
+      'Respiratory arrest'
+    ]
+  },
+  cardiovascular: {
+    organ: 'Cardiovascular',
+    reactions: [
+      'Tachycardia',
+      'Lowered BP',
+      'Shock',
+      'Cardiac arrest'
+    ]
+  }
+}
