@@ -6,7 +6,8 @@
 
 import React, { Component } from 'react';
 import {
-  Text
+  Text,
+  TouchableHighlight
 } from 'react-native';
 import { Content,
          Form,
@@ -14,17 +15,26 @@ import { Content,
          Input,
          Label,
          Picker} from 'native-base';
+import CalendarModal from './calendar_modal'
 import ORGAN_REACTION_LIST from './organ_reaction_list.json'
 
 export default class EventScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      eventDate: new Date().toLocaleDateString(),
+      calendarModalVisible: false,
       severity: 'Mild',
       organ: 'Skin',
       reaction: 'Uticaria',
       reactions: ORGAN_REACTION_LIST['skin']['reactions']
     };
+
+    this.toggleDiscountModal = this.toggleDiscountModal.bind(this)
+  }
+
+  toggleDiscountModal(){
+      this.setState({calendarModalVisible: !this.state.calendarModalVisible});
   }
 
   setSeverity(value: string){
@@ -51,7 +61,7 @@ export default class EventScreen extends Component {
           <Form>
             <Item fixedLabel>
              <Label>Date</Label>
-             <Input />
+             <TouchableHighlight onPress={this.toggleDiscountModal.bind(this)}><Text>{this.state.eventDate}</Text></TouchableHighlight>
             </Item>
             <Item fixedLabel>
               <Label>Severity</Label>
@@ -86,7 +96,9 @@ export default class EventScreen extends Component {
               </Picker>
             </Item>
           </Form>
+          <CalendarModal modalVisible={this.state.calendarModalVisible} toggleDiscountModal={this.toggleDiscountModal.bind(this)}/>
         </Content>
+
     );
   }
 }
