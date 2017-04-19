@@ -17,11 +17,17 @@ export default class AwesomeNativeBase extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentTab: 0,
       patient: {
         name: '',
         urn: ''},
       events: [],
-      medications:[]
+      medications:[],
+      event: {date: new Date().toLocaleDateString(),
+              severity: 'Mild',
+              organ: 'Skin',
+              reaction: 'Uticaria'},
+      medication: null
     };
 
     this.setPatient = this.setPatient.bind(this);
@@ -33,7 +39,39 @@ export default class AwesomeNativeBase extends Component {
     this.setState({patient: patient});
   }
 
+  setEvent(event){
+    this.setState({event: event});
+  }
+
+  setMedication(medication){
+    this.setState({medication: medication});
+  }
+
+  add(){
+    if(this.state.currentTab == 1){
+      var events = this.state.events;
+      events.push(this.state.event);
+      this.setState({events: events});
+
+      alert(events[1]['reaction']);
+    }else if(this.state.currentTab == 2){
+      var medications = this.state.medications;
+      medications.push(this.state.medication);
+      this.setState({medications: medications});
+    }
+  }
+
+  changeTab(event){
+    this.setState({currentTab: event.i});
+    console.log(event.ref.props.heading);
+  }
+
   render() {
+    var addButton = null;
+    if([1, 2].includes(this.state.currentTab)){
+      addButton = <Button full onPress={this.add.bind(this)}><Text>Add</Text></Button>
+    }
+
     return (
       <Container>
         <Header hasTabs>
@@ -41,22 +79,20 @@ export default class AwesomeNativeBase extends Component {
             <Title>Medicine Tracker</Title>
           </Body>
         </Header>
-        <Tabs>
+        <Tabs onChangeTab={(event) => this.changeTab(event)}>
           <Tab heading="Patient">
             <PatientScreen setPatient={this.setPatient}/>
           </Tab>
           <Tab heading="Event">
-            <EventScreen/>
+            <EventScreen setEvent={(event) => this.setEvent(event)} events={this.state.events}/>
           </Tab>
           <Tab heading="Medications">
-            <MedicationScreen/>
+            <MedicationScreen setMedication={(medication) => this.setMedication(medication)}/>
           </Tab>
         </Tabs>
         <Footer>
           <FooterTab>
-            <Button full>
-              <Text>Report</Text>
-            </Button>
+            {addButton}
           </FooterTab>
         </Footer>
       </Container>

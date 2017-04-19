@@ -13,6 +13,10 @@ import {
       super(props);
     }
 
+    closeModal(){
+      this.props.toggleCalendarModal();
+    }
+
     render(){
       return(
         <Modal
@@ -20,10 +24,15 @@ import {
           transparent={true}
           visible={this.props.modalVisible}>
           <View style={styles.modalContainer}>
-            <TouchableHighlight onPress={() => this.props.toggleDiscountModal()}>
-              <Icon name='close'/>
-            </TouchableHighlight>
-            <Text>Calendar Modal</Text>
+            <View style={styles.title}>
+              <Text>Event Date</Text>
+              <TouchableHighlight onPress={this.closeModal.bind(this)}>
+                <View><Icon name='close'/></View>
+              </TouchableHighlight>
+            </View>
+            <View style={styles.content}>
+              <Text>Calendar picker goes here.</Text>
+            </View>
           </View>
         </Modal>
       )
@@ -32,6 +41,23 @@ import {
 
   const styles = StyleSheet.create({
     modalContainer:{
-      margin: 20
+      marginLeft: 20,
+      marginRight: 20,
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      padding: 15,
+      width: 335,
+      height: 400
+    },
+    title:{
+      flexDirection: 'row',
+      height: 30,
+      justifyContent: 'space-between',
+      borderBottomWidth: 1
+    },
+    content:{
+      width: 335,
+      height: 300,
+      marginTop: 10
     }
   })
