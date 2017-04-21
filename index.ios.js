@@ -9,7 +9,7 @@ import {
   AppRegistry,
   Text
 } from 'react-native';
-import { Container, Header, Title, Content, Tabs, Tab, Footer, FooterTab, Button, Left, Right, Body, Icon} from 'native-base';
+import { Container, Header, Title, Content, Tabs, Tab, Footer, FooterTab, Button, Left, Right, Body, Icon, Toast} from 'native-base';
 import PatientScreen from './patient_screen'
 import EventScreen from './event_screen'
 import MedicationScreen from './medication_screen'
@@ -46,13 +46,25 @@ export default class AwesomeNativeBase extends Component {
 
   add(){
     if(this.state.currentTab == 1){
-        var events = this.state.events;
-        events.push(this.state.event);
-        this.setState({events: events});
+        //var events = this.state.events;
+        //events.push(this.state.event);
+        //this.setState({events: events});
+
+        Toast.show({
+              text: 'Event added!',
+              position: 'bottom',
+              duration: 60
+            });
     }else if(this.state.currentTab == 2){
-        var medications = this.state.medications;
-        medications.push(this.state.medication);
-        this.setState({medications: medications});
+    //    var medications = this.state.medications;
+    //    medications.push(this.state.medication);
+    //    this.setState({medications: medications});
+
+        Toast.show({
+              text: 'Medication added!',
+              position: 'bottom',
+              duration: 60
+            });
     }
   }
 
@@ -70,9 +82,15 @@ export default class AwesomeNativeBase extends Component {
     return (
       <Container>
         <Header hasTabs>
-          <Body>
-            <Title>Medicine Tracker</Title>
-          </Body>
+         <Left>
+          <Button transparent>
+           <Icon name='menu' />
+          </Button>
+         </Left>
+         <Body>
+          <Title>Medicine Tracker</Title>
+        </Body>
+        <Right></Right>
         </Header>
         <Tabs onChangeTab={(event) => this.changeTab(event)}>
           <Tab heading="Patient">
