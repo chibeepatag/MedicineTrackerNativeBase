@@ -26,8 +26,8 @@ export default class EventScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventDate: new Date().toLocaleDateString(),
       calendarModalVisible: false,
+      eventDate: new Date().toLocaleDateString(),
       severity: 'Mild',
       organ: 'Skin',
       reaction: 'Uticaria',
@@ -71,6 +71,7 @@ export default class EventScreen extends Component {
   render() {
     keys = Object.keys(ORGAN_REACTION_LIST)
     organs = keys.map((key) => ORGAN_REACTION_LIST[key]['organ'])
+
     return (
         <Content>
           <Form>
@@ -111,18 +112,6 @@ export default class EventScreen extends Component {
               </Picker>
             </Item>
           </Form>
-          <View>
-            {this.props.events.map((event) => {
-              <Card><CardItem header>
-                  <Text>{event.reaction}</Text>
-              </CardItem>
-              <CardItem>
-                  <Text>{event.date}</Text>
-                  <Text>{event.severity}</Text>
-                  <Text>{event.organ}</Text>
-              </CardItem></Card>
-            })}
-          </View>
           <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)}/>
         </Content>
     );

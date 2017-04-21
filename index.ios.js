@@ -23,10 +23,7 @@ export default class AwesomeNativeBase extends Component {
         urn: ''},
       events: [],
       medications:[],
-      event: {date: new Date().toLocaleDateString(),
-              severity: 'Mild',
-              organ: 'Skin',
-              reaction: 'Uticaria'},
+      event: null,
       medication: null
     };
 
@@ -49,15 +46,13 @@ export default class AwesomeNativeBase extends Component {
 
   add(){
     if(this.state.currentTab == 1){
-      var events = this.state.events;
-      events.push(this.state.event);
-      this.setState({events: events});
-
-      alert(events[1]['reaction']);
+        var events = this.state.events;
+        events.push(this.state.event);
+        this.setState({events: events});
     }else if(this.state.currentTab == 2){
-      var medications = this.state.medications;
-      medications.push(this.state.medication);
-      this.setState({medications: medications});
+        var medications = this.state.medications;
+        medications.push(this.state.medication);
+        this.setState({medications: medications});
     }
   }
 
@@ -84,7 +79,7 @@ export default class AwesomeNativeBase extends Component {
             <PatientScreen setPatient={this.setPatient}/>
           </Tab>
           <Tab heading="Event">
-            <EventScreen setEvent={(event) => this.setEvent(event)} events={this.state.events}/>
+            <EventScreen setEvent={(event) => this.setEvent(event)}/>
           </Tab>
           <Tab heading="Medications">
             <MedicationScreen setMedication={(medication) => this.setMedication(medication)}/>
