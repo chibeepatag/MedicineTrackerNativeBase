@@ -1,0 +1,114 @@
+[
+    {
+    name: 'Aminoglycosides',
+    antibiotics: ['Amikacin',
+                  'Gentamicin',
+                  'Neomycin',
+                  'Tobramycin',
+                  'Streptomycin']
+  },
+  {
+    name: 'Ansamycins',
+    antibiotics: ['Rifaximin']
+  },
+  {
+    name: 'Carbapenems',
+    antibiotics: ['Ertapenem',
+                  'Imipenem',
+                  'Meropenem']
+  },
+  {
+    name: 'Cephalosporins',
+    antibiotics: ['Cephazolin',
+                  'Cephalothin',
+                  'Cephalexin',
+                  'Cefaclor',
+                  'Cefuroxime',
+                  'Ceftazidime ',
+                  'Ceftriaxone ',
+                  'Cefepime']
+  },
+  {
+    name: 'Glycopeptides',
+    antibiotics: ['Teicoplanin',
+                  'Vancomycin']
+  },
+  {
+    name: 'Lincosamides',
+    antibiotics: ['Clindamycin',
+                  'Lincomycin']
+  },
+  {
+    name: 'Lipopeptide',
+    antibiotics: ['Daptomycin']
+  },
+  {
+    name: 'Macrolides',
+    antibiotics: ['Azithromycin',
+                  'Clarithromycin',
+                  'Erythromycin',
+                  'Roxithromycin',
+                  'Spiramycin']
+  },
+  {
+    name: 'Monobactams',
+    antibiotics: ['Aztreonam']
+  },
+  {
+    name: 'Nitrofurans',
+    antibiotics: ['Nitrofurantoin']
+  },
+  {
+    name: 'Oxazolidinones',
+    antibiotics: ['Linezolid']
+  },
+  {
+    name: 'Penicillins',
+    antibiotics: ['Amoxicillin',
+                  'Augmentin',
+                  'Ampicillin',
+                  'Benzyl Penicillin',
+                  'Dicloxacillin',
+                  'Flucloxacillin',
+                  'Penicillin G',
+                  'Penicillin V',
+                  'Piperacillin',
+                  'Ticarcillin',
+                  'Tazocin',
+                  'Timentin']
+  },
+  {
+    name: 'Quinolones',
+    antibiotics: ['Ciprofloxacin',
+                  'Levofloxacin',
+                  'Moxifloxacin',
+                  'Norfloxacin']
+  },
+  {
+    name: 'Sulfonamides',
+    antibiotics: ['Sulfadiazine',
+                  'Sulfamethoxazole',
+                  'Trimethoprim-Sulfamethoxazole']
+  },
+  {
+    name: 'Tetracyclines',
+    antibiotics: ['Doxycycline',
+                  'Minocycline']
+  },
+  {
+    name: 'Other',
+    antibiotics: ['Metronidazole',
+                  'Trimethoprim',
+                  'Dapsone',
+                  'Ethambutol',
+                  'Isoniazid',
+                  'Pyrazinamide',
+                  'Rifampicin',
+                  'Rifabutin',
+                  'Streptomycin',
+                  'Chloramphenicol',
+                  'Tigecycline',
+                  'Fosfomycin',
+                  'Fusidic acid']
+  }
+]
