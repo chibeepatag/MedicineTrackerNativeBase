@@ -8,10 +8,11 @@ import React, { Component } from 'react';
 import {
  StyleSheet,
  Text,
- View
+ View,
+ TouchableHighlight
 } from 'react-native';
 import { Content, Form, Item, Label, Picker} from 'native-base';
-
+import CalendarModal from './calendar_modal'
 import MEDICATIONS_LIST from './medications_list.json';
 import DOSE from './dose.json'
 import FREQUENCY from './frequency.json'
@@ -22,15 +23,20 @@ export default class MedicationScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      calendarModalVisible: false,
       antibiotics: [],
       medication_class: '',
       antobiotic: '',
       dose: '',
       frequency: '',
       route: '',
-      start: '',
-      end: ''
+      startDate: new Date(),
+      endDate: new Date()
     }
+  }
+
+  toggleCalendarModal(){
+      this.setState({calendarModalVisible: !this.state.calendarModalVisible});
   }
 
   onValueChangeClass(value: string){
@@ -54,6 +60,14 @@ export default class MedicationScreen extends Component {
 
   onValueChangeRoute(value: string){
     this.setState({route: value})
+  }
+
+  setStartDate(date){
+    this.setState({startDate: date})
+  }
+
+  setEndDate(date){
+    this.setState({endDate: date})
   }
 
  render() {
@@ -118,11 +132,14 @@ export default class MedicationScreen extends Component {
             </Item>
             <Item fixedLabel>
               <Label>Start</Label>
+              <TouchableHighlight  onPress={this.toggleCalendarModal.bind(this)}><Text>{this.state.startDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
             </Item>
             <Item fixedLabel>
               <Label>End</Label>
+              <TouchableHighlight  onPress={this.toggleCalendarModal.bind(this)}><Text>{this.state.endDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
             </Item>
           </Form>
+          <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)} allowRangeSelection={true} setStartDate={this.setStartDate.bind(this)} setEndDate={this.setEndDate.bind(this)}/>
        </Content>
 
    );

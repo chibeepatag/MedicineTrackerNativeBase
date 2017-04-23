@@ -74,12 +74,11 @@ import {
 
   const styles = StyleSheet.create({
     modalContainer:{
-      marginLeft: 20,
-      marginRight: 20,
+      
       backgroundColor: 'white',
       justifyContent: 'center',
       padding: 15,
-      width: 335,
+      width: 375,
       height: 400
     },
     title:{
@@ -89,7 +88,7 @@ import {
       borderBottomWidth: 1
     },
     content:{
-      width: 335,
+      width: 375,
       height: 300,
       marginTop: 10
     }
