@@ -47,7 +47,7 @@ import {
           visible={this.props.modalVisible}>
           <View style={styles.modalContainer}>
             <View style={styles.title}>
-              <Text>Event Date</Text>
+              <Text>{this.props.title}</Text>
               <TouchableHighlight onPress={this.closeModal.bind(this)}>
                 <View><Icon name='close'/></View>
               </TouchableHighlight>
@@ -74,7 +74,7 @@ import {
 
   const styles = StyleSheet.create({
     modalContainer:{
-      
+
       backgroundColor: 'white',
       justifyContent: 'center',
       padding: 15,

@@ -139,7 +139,7 @@ export default class MedicationScreen extends Component {
               <TouchableHighlight  onPress={this.toggleCalendarModal.bind(this)}><Text>{this.state.endDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
             </Item>
           </Form>
-          <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)} allowRangeSelection={true} setStartDate={this.setStartDate.bind(this)} setEndDate={this.setEndDate.bind(this)}/>
+          <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)} title={'Medication Start - End'} allowRangeSelection={true} setStartDate={this.setStartDate.bind(this)} setEndDate={this.setEndDate.bind(this)}/>
        </Content>
 
    );

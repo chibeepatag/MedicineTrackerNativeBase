@@ -116,7 +116,7 @@ export default class EventScreen extends Component {
               </Picker>
             </Item>
           </Form>
-          <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)} allowRangeSelection={false} setStartDate={this.setEventDate.bind(this)} setEndDate={null}/>
+          <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)} title={'Event Date '} allowRangeSelection={false} setStartDate={this.setEventDate.bind(this)} setEndDate={null}/>
         </Content>
     );
   }
