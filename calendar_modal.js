@@ -7,17 +7,39 @@ import {
   TouchableHighlight
   } from 'react-native';
   import { Icon } from 'native-base';
+  import CalendarPicker from 'react-native-calendar-picker';
 
   export default class CalendarModal extends Component{
     constructor(props){
       super(props);
+      this.state = {
+        selectedStartDate: null,
+        selectedEndDate: null,
+      };
+      this.onDateChange = this.onDateChange.bind(this);
     }
 
     closeModal(){
       this.props.toggleCalendarModal();
     }
 
+    onDateChange(date, type) {
+      if (type === 'END_DATE') {
+        this.setState({ selectedEndDate: date});
+        this.props.setEndDate(date);
+      } else {
+        this.props.setStartDate(date);
+        this.setState({
+          selectedStartDate: date,
+          selectedEndDate: null,
+        });
+      }
+    }
+
     render(){
+      const minDate = new Date(2017, 1, 1);
+      const maxDate = new Date(2017, 6, 3);
+
       return(
         <Modal
           animationType={"fade"}
@@ -31,7 +53,18 @@ import {
               </TouchableHighlight>
             </View>
             <View style={styles.content}>
-              <Text>Calendar picker goes here.</Text>
+            <CalendarPicker
+              startFromMonday={true}
+              allowRangeSelection={this.props.allowRangeSelection}
+              minDate={minDate}
+              maxDate={maxDate}
+              todayBackgroundColor="#f2e6ff"
+              selectedDayColor="#7300e6"
+              selectedDayTextColor="#FFFFFF"
+              onDateChange={this.onDateChange}
+            />
+            <View>
+            </View>
             </View>
           </View>
         </Modal>

@@ -27,7 +27,7 @@ export default class EventScreen extends Component {
     super(props);
     this.state = {
       calendarModalVisible: false,
-      eventDate: new Date().toLocaleDateString(),
+      eventDate: new Date(),
       severity: 'Mild',
       organ: 'Skin',
       reaction: 'Uticaria',
@@ -35,6 +35,10 @@ export default class EventScreen extends Component {
       events: []
     };
     this.setEvent = this.setEvent.bind(this);
+  }
+
+  setEventDate(date){
+    this.setState({eventDate: date})
   }
 
   toggleCalendarModal(){
@@ -77,7 +81,7 @@ export default class EventScreen extends Component {
           <Form>
             <Item fixedLabel>
              <Label>Date</Label>
-             <TouchableHighlight style={styles.dateLabel} onPress={this.toggleCalendarModal.bind(this)}><Text style={styles.dateText}>{this.state.eventDate}</Text></TouchableHighlight>
+             <TouchableHighlight style={styles.dateLabel} onPress={this.toggleCalendarModal.bind(this)}><Text style={styles.dateText}>{this.state.eventDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
             </Item>
             <Item fixedLabel>
               <Label>Severity</Label>
@@ -112,7 +116,7 @@ export default class EventScreen extends Component {
               </Picker>
             </Item>
           </Form>
-          <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)}/>
+          <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)} allowRangeSelection={false} setStartDate={this.setEventDate.bind(this)} setEndDate={null}/>
         </Content>
     );
   }
