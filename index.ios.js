@@ -13,6 +13,7 @@ import { Container, Header, Title, Content, Tabs, Tab, Footer, FooterTab, Button
 import PatientScreen from './patient_screen'
 import EventScreen from './event_screen'
 import MedicationScreen from './medication_screen'
+
 export default class AwesomeNativeBase extends Component {
   constructor(props) {
     super(props);
@@ -46,19 +47,19 @@ export default class AwesomeNativeBase extends Component {
 
   add(){
     if(this.state.currentTab == 1){
-        //var events = this.state.events;
-        //events.push(this.state.event);
-        //this.setState({events: events});
+        var events = this.state.events;
+        events.push(this.state.event);
+        this.setState({events: events});
 
         Toast.show({
-              text: 'Event added!',
+              text: 'Event added!' + event.organ + ':' + event.reaction,
               position: 'bottom',
-              duration: 60
+              duration: 3000
             });
     }else if(this.state.currentTab == 2){
-    //    var medications = this.state.medications;
-    //    medications.push(this.state.medication);
-    //    this.setState({medications: medications});
+       var medications = this.state.medications;
+       medications.push(this.state.medication);
+       this.setState({medications: medications});
 
         Toast.show({
               text: 'Medication added!',
@@ -97,10 +98,10 @@ export default class AwesomeNativeBase extends Component {
             <PatientScreen setPatient={this.setPatient}/>
           </Tab>
           <Tab heading="Event">
-            <EventScreen setEvent={(event) => this.setEvent(event)}/>
+            <EventScreen setEvent={this.setEvent.bind(this)}/>
           </Tab>
           <Tab heading="Medications">
-            <MedicationScreen setMedication={(medication) => this.setMedication(medication)}/>
+            <MedicationScreen setMedication={this.setMedication.bind(this)}/>
           </Tab>
         </Tabs>
         <Footer>

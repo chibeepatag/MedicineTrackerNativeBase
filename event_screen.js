@@ -39,6 +39,7 @@ export default class EventScreen extends Component {
 
   setEventDate(date){
     this.setState({eventDate: date})
+    this.setEvent();
   }
 
   toggleCalendarModal(){
@@ -60,7 +61,7 @@ export default class EventScreen extends Component {
   }
 
   setReaction(value: string){
-    this.setState({reaction: value});
+    this.setState({reaction: value})
     this.setEvent();
   }
 
