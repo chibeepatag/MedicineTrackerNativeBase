@@ -1,5 +1,5 @@
-[
-    {
+{
+    aminoglycosides: {
     name: 'Aminoglycosides',
     antibiotics: ['Amikacin',
                   'Gentamicin',
@@ -7,17 +7,17 @@
                   'Tobramycin',
                   'Streptomycin']
   },
-  {
+  ansamycins: {
     name: 'Ansamycins',
     antibiotics: ['Rifaximin']
   },
-  {
+  carbapenems: {
     name: 'Carbapenems',
     antibiotics: ['Ertapenem',
                   'Imipenem',
                   'Meropenem']
   },
-  {
+  cephalosporins: {
     name: 'Cephalosporins',
     antibiotics: ['Cephazolin',
                   'Cephalothin',
@@ -28,21 +28,21 @@
                   'Ceftriaxone ',
                   'Cefepime']
   },
-  {
+  glycopeptides: {
     name: 'Glycopeptides',
     antibiotics: ['Teicoplanin',
                   'Vancomycin']
   },
-  {
+  lincosamides: {
     name: 'Lincosamides',
     antibiotics: ['Clindamycin',
                   'Lincomycin']
   },
-  {
+  lipopeptide: {
     name: 'Lipopeptide',
     antibiotics: ['Daptomycin']
   },
-  {
+  macrolides: {
     name: 'Macrolides',
     antibiotics: ['Azithromycin',
                   'Clarithromycin',
@@ -50,19 +50,19 @@
                   'Roxithromycin',
                   'Spiramycin']
   },
-  {
+  monobactams: {
     name: 'Monobactams',
     antibiotics: ['Aztreonam']
   },
-  {
+  nitrofurans: {
     name: 'Nitrofurans',
     antibiotics: ['Nitrofurantoin']
   },
-  {
+  oxazolidinones: {
     name: 'Oxazolidinones',
     antibiotics: ['Linezolid']
   },
-  {
+  penicillins: {
     name: 'Penicillins',
     antibiotics: ['Amoxicillin',
                   'Augmentin',
@@ -77,25 +77,25 @@
                   'Tazocin',
                   'Timentin']
   },
-  {
+  quinolones: {
     name: 'Quinolones',
     antibiotics: ['Ciprofloxacin',
                   'Levofloxacin',
                   'Moxifloxacin',
                   'Norfloxacin']
   },
-  {
+  sulfonamides: {
     name: 'Sulfonamides',
     antibiotics: ['Sulfadiazine',
                   'Sulfamethoxazole',
                   'Trimethoprim-Sulfamethoxazole']
   },
-  {
+  tetracyclines: {
     name: 'Tetracyclines',
     antibiotics: ['Doxycycline',
                   'Minocycline']
   },
-  {
+  other: {
     name: 'Other',
     antibiotics: ['Metronidazole',
                   'Trimethoprim',
@@ -111,4 +111,4 @@
                   'Fosfomycin',
                   'Fusidic acid']
   }
-]
+}

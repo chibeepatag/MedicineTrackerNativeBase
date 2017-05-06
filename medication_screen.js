@@ -25,13 +25,6 @@ export default class MedicationScreen extends Component {
     this.state = {
       calendarModalVisible: false,
       antibiotics: [],
-      medication_class: '',
-      antobiotic: '',
-      dose: '',
-      frequency: '',
-      route: '',
-      startDate: new Date(),
-      endDate: new Date()
     }
   }
 
@@ -40,47 +33,40 @@ export default class MedicationScreen extends Component {
   }
 
   onValueChangeClass(value: string){
-    medication = MEDICATIONS_LIST.find((item) => item.name == value)
-    this.setState({medication_class: value,
-                   antibiotics: medication.antibiotics
-                 });
+    keys = Object.keys(MEDICATIONS_LIST)
+    key = keys.find((key) => MEDICATIONS_LIST[key]['name'] === value)
+    this.setState({antibiotics: MEDICATIONS_LIST[key]['antibiotics']})
+    this.props.setMedication('medication_class', value)
   }
 
   onValueChangeAntibiotic(value: string){
-    this.setState({antibiotic: value})
+    this.props.setMedication('antibiotic', value)
   }
 
   onValueChangeDose(value: string){
-    this.setState({dose: value})
+    this.props.setMedication('dose', value)
   }
 
   onValueChangeFrequency(value: string){
-    this.setState({frequency: value})
+    this.props.setMedication('frequency', value)
   }
 
   onValueChangeRoute(value: string){
-    this.setState({route: value})
+    this.props.setMedication('route', value)
   }
 
   setStartDate(date){
-    this.setState({startDate: date})
+    this.props.setMedication('startDate', value)
   }
 
   setEndDate(date){
-    this.setState({endDate: date})
+    this.props.setMedication('endDate', value)
   }
 
  render() {
-   var antibioticPicker = null;
-   if(this.state.medication_class.length > 1){
-     antibioticPicker = <Picker
-       iosHeader="Antibiotic"
-       mode="dropdown"
-       selectedValue={this.state.antibiotic}
-       onValueChange={this.onValueChangeAntibiotic.bind(this)}>
-       {this.state.antibiotics.map((dose, index) => <Picker.Item  key={index} label={dose}  value={dose} />)}
-     </Picker>
-   }
+   const medication = this.props.getMedication();
+   keys = Object.keys(MEDICATIONS_LIST)
+   classes = keys.map((key) => MEDICATIONS_LIST[key]['name'])
 
    return (
        <Content>
@@ -90,22 +76,28 @@ export default class MedicationScreen extends Component {
           <Picker
             iosHeader="Class"
             mode="dropdown"
-            selectedValue={this.state.medication_class}
+            selectedValue={medication.medication_class}
             onValueChange={this.onValueChangeClass.bind(this)}>
-            {MEDICATIONS_LIST.map((med_class, index) => <Picker.Item  key={index} label={med_class.name}  value={med_class.name}/>)}
+            {classes.map((med_class, index) => <Picker.Item  key={index} label={med_class}  value={med_class}/>)}
           </Picker>
 
           </Item>
           <Item fixedLabel>
             <Label>Antibiotic</Label>
-            {antibioticPicker}
+            <Picker
+                      iosHeader="Antibiotic"
+                      mode="dropdown"
+                      selectedValue={medication.antibiotic}
+                      onValueChange={this.onValueChangeAntibiotic.bind(this)}>
+                      {this.state.antibiotics.map((antibiotic, index) => <Picker.Item  key={index} label={antibiotic}  value={antibiotic} />)}
+             </Picker>
             </Item>
             <Item fixedLabel>
               <Label>Dose</Label>
               <Picker
                 iosHeader="Dose"
                 mode="dropdown"
-                selectedValue={this.state.dose}
+                selectedValue={medication.dose}
                 onValueChange={this.onValueChangeDose.bind(this)}>
                 {DOSE.map((dose, index) => <Picker.Item  key={index} label={dose}  value={dose} itemTextStyle={styles.itemStyle}/>)}
               </Picker>
@@ -115,7 +107,7 @@ export default class MedicationScreen extends Component {
               <Picker
                 iosHeader="Frequency"
                 mode="dropdown"
-                selectedValue={this.state.frequency}
+                selectedValue={medication.frequency}
                 onValueChange={this.onValueChangeFrequency.bind(this)}>
                 {FREQUENCY.map((dose, index) => <Picker.Item  key={index} label={dose}  value={dose} itemTextStyle={styles.itemStyle}/>)}
               </Picker>
@@ -125,18 +117,18 @@ export default class MedicationScreen extends Component {
               <Picker
                 iosHeader="Route"
                 mode="dropdown"
-                selectedValue={this.state.route}
+                selectedValue={medication.route}
                 onValueChange={this.onValueChangeRoute.bind(this)}>
                 {ROUTE.map((dose, index) => <Picker.Item  key={index} label={dose}  value={dose} itemTextStyle={styles.itemStyle}/>)}
               </Picker>
             </Item>
             <Item fixedLabel>
               <Label>Start</Label>
-              <TouchableHighlight  onPress={this.toggleCalendarModal.bind(this)}><Text>{this.state.startDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
+              <TouchableHighlight  onPress={this.toggleCalendarModal.bind(this)}><Text>{medication.startDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
             </Item>
             <Item fixedLabel>
               <Label>End</Label>
-              <TouchableHighlight  onPress={this.toggleCalendarModal.bind(this)}><Text>{this.state.endDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
+              <TouchableHighlight  onPress={this.toggleCalendarModal.bind(this)}><Text>{medication.endDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
             </Item>
           </Form>
           <CalendarModal modalVisible={this.state.calendarModalVisible} toggleCalendarModal={this.toggleCalendarModal.bind(this)} title={'Medication Start - End'} allowRangeSelection={true} setStartDate={this.setStartDate.bind(this)} setEndDate={this.setEndDate.bind(this)}/>

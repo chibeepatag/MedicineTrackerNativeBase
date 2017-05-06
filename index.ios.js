@@ -7,7 +7,8 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  Text
+  Text,
+  View
 } from 'react-native';
 import { Container, Header, Title, Content, Tabs, Tab, Footer, FooterTab, Button, Left, Right, Body, Icon, Toast} from 'native-base';
 import PatientScreen from './patient_screen'
@@ -24,24 +25,35 @@ export default class AwesomeNativeBase extends Component {
         urn: ''},
       events: [],
       medications:[],
-      event: null,
-      medication: null
+      event: {eventDate: new Date()},
+      medication: {startDate: new Date(), endDate: new Date()}
     };
 
     this.setPatient = this.setPatient.bind(this);
   }
 
   setPatient(key, value){
-    patient = this.state.patient
-    patient[key] = value;
-    this.setState({patient: patient});
+    this.setState({patient: Object.assign({}, this.state.patient, { [key]: value })});
   }
 
-  setEvent(event){
-    this.setState({event: event});
+  getEvent(){
+    return this.state.event
   }
 
-  setMedication(medication){
+  setEvent(key, value){
+    event = this.state.event
+    event[key] = value;
+    this.setState({event: event})
+    //this.setState({event: Object.assign({}, event)})
+  }
+
+  getMedication(){
+    return this.state.medication
+  }
+
+  setMedication(key, value){
+    medication = this.state.medication
+    medication[key] = value
     this.setState({medication: medication});
   }
 
@@ -52,7 +64,7 @@ export default class AwesomeNativeBase extends Component {
         this.setState({events: events});
 
         Toast.show({
-              text: 'Event added!' + event.organ + ':' + event.reaction,
+              text: 'Event added! ' + event.organ + ' : ' + event.reaction,
               position: 'bottom',
               duration: 3000
             });
@@ -62,9 +74,9 @@ export default class AwesomeNativeBase extends Component {
        this.setState({medications: medications});
 
         Toast.show({
-              text: 'Medication added!',
+              text: 'Medication added! ' + medication.antibiotic + ' : ' + medication.route + ' : ' + medication.dose,
               position: 'bottom',
-              duration: 60
+              duration: 3000
             });
     }
   }
@@ -98,10 +110,10 @@ export default class AwesomeNativeBase extends Component {
             <PatientScreen setPatient={this.setPatient}/>
           </Tab>
           <Tab heading="Event">
-            <EventScreen setEvent={this.setEvent.bind(this)}/>
+            <EventScreen setEvent={this.setEvent.bind(this)} getEvent={this.getEvent.bind(this)}/>
           </Tab>
           <Tab heading="Medications">
-            <MedicationScreen setMedication={this.setMedication.bind(this)}/>
+            <MedicationScreen setMedication={this.setMedication.bind(this)} getMedication={this.getMedication.bind(this)}/>
           </Tab>
         </Tabs>
         <Footer>

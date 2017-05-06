@@ -27,50 +27,31 @@ export default class EventScreen extends Component {
     super(props);
     this.state = {
       calendarModalVisible: false,
-      eventDate: new Date(),
-      severity: 'Mild',
-      organ: 'Skin',
-      reaction: 'Uticaria',
       reactions: ORGAN_REACTION_LIST['skin']['reactions'],
-      events: []
     };
-    this.setEvent = this.setEvent.bind(this);
-  }
-
-  setEventDate(date){
-    this.setState({eventDate: date})
-    this.setEvent();
   }
 
   toggleCalendarModal(){
       this.setState({calendarModalVisible: !this.state.calendarModalVisible});
   }
 
+  setEventDate(date){
+    this.props.setEvent('eventDate', date);
+  }
+
   setSeverity(value: string){
-    this.setState({severity : value});
-    this.setEvent();
+    this.props.setEvent('severity', value);
   }
 
   setOrgan(value: string){
-    this.setState({organ: value})
-
     keys = Object.keys(ORGAN_REACTION_LIST)
     key = keys.find((key) => ORGAN_REACTION_LIST[key]['organ'] === value)
     this.setState({reactions: ORGAN_REACTION_LIST[key]['reactions']})
-    this.setEvent();
+    this.props.setEvent('organ', value);
   }
 
   setReaction(value: string){
-    this.setState({reaction: value})
-    this.setEvent();
-  }
-
-  setEvent(){
-    event = {date: this.state.eventDate,
-             severity: this.state.severity,
-             organ: this.state.organ,
-             reaction: this.state.reaction}
-    this.props.setEvent(event);
+    this.props.setEvent('reaction', value);
   }
 
   render() {
@@ -82,14 +63,17 @@ export default class EventScreen extends Component {
           <Form>
             <Item fixedLabel>
              <Label>Date</Label>
-             <TouchableHighlight style={styles.dateLabel} onPress={this.toggleCalendarModal.bind(this)}><Text style={styles.dateText}>{this.state.eventDate.toLocaleDateString('en-AU')}</Text></TouchableHighlight>
+             <TouchableHighlight style={styles.dateLabel}
+                                 onPress={this.toggleCalendarModal.bind(this)}>
+              <Text style={styles.dateText}>{this.props.getEvent().eventDate? this.props.getEvent().eventDate.toLocaleDateString('en-AU'): ''}</Text>
+             </TouchableHighlight>
             </Item>
             <Item fixedLabel>
               <Label>Severity</Label>
               <Picker
                         iosHeader="Select one"
                         mode="dropdown"
-                        selectedValue={this.state.severity}
+                        selectedValue={this.props.getEvent().severity}
                         onValueChange={this.setSeverity.bind(this)}>
                         <Picker.Item label="Mild" value="Mild" />
                         <Picker.Item label="Moderate" value="Moderate" />
@@ -101,7 +85,7 @@ export default class EventScreen extends Component {
              <Picker
                        iosHeader="Select one"
                        mode="dropdown"
-                       selectedValue={this.state.organ}
+                       selectedValue={this.props.getEvent().organ}
                        onValueChange={this.setOrgan.bind(this)}>
                        {organs.map((organ, index) => <Picker.Item  key={index} label={organ}  value={organ} />)}
               </Picker>
@@ -111,7 +95,7 @@ export default class EventScreen extends Component {
              <Picker
                        iosHeader="Select one"
                        mode="dropdown"
-                       selectedValue={this.state.reaction}
+                       selectedValue={this.props.getEvent().reaction}
                        onValueChange={this.setReaction.bind(this)}>
                        {this.state.reactions.map((reaction, index) => <Picker.Item  key={index} label={reaction}  value={reaction} />)}
               </Picker>
