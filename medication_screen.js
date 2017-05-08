@@ -56,11 +56,11 @@ export default class MedicationScreen extends Component {
   }
 
   setStartDate(date){
-    this.props.setMedication('startDate', value)
+    this.props.setMedication('startDate', date)
   }
 
   setEndDate(date){
-    this.props.setMedication('endDate', value)
+    this.props.setMedication('endDate', date)
   }
 
  render() {
